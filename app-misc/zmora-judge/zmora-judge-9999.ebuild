@@ -8,7 +8,10 @@ EAPI=5
 
 DESCRIPTION="Zmora-judge is judge program for zmora."
 HOMEPAGE="https://github.com/zmora-agh/zmora-judge"
-SRC_URI="http://bindist.zmora-agh.memleak.pl/judge/zmora-judge-${PV}.tar.gz"
+if ! [[ ${PV} = *9999* ]]; then
+	SRC_URI="http://bindist.zmora-agh.memleak.pl/judge/zmora-judge-${PV}.tar.gz"
+fi
+
 S="${WORKDIR}/zmora-judge"
 LICENSE="Apache-2.0"
 SLOT="0"
