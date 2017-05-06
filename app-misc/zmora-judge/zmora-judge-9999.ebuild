@@ -23,4 +23,5 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	dobin zmora-judge/zmora-judge
+	doinitd ${FILESDIR}/zmora-judge
 }

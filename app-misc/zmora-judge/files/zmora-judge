@@ -1,0 +1,33 @@
+#!/sbin/openrc-run
+# Copyright 2017 Zmora-AGH
+# Distributed under the terms of the GNU General Public License v2
+
+# Apply default values for some conf.d variables.
+PIDFILE="${PIDFILE:-/var/run/zmora-judge.pid}"
+TIMEOUT=${TIMEOUT:-15}
+
+# The path to the apache2 binary
+ZMORA_JUDGE="/usr/bin/zmora-judge"
+
+depend() {
+	need net
+	use dns logger netmount
+	after sshd
+}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	# Use start stop daemon to apply system limits #347301 
+	start-stop-daemon --start --background --make-pidfile --exec ${ZMORA_JUDGE}
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --exec ${ZMORA_JUDGE}
+
+	eend $?
+}
+
+# vim: ts=4 filetype=gentoo-init-d
