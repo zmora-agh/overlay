@@ -6,9 +6,9 @@ EAPI=5
 
 #inherit git-r3 toolchain-funcs
 
-DESCRIPTION="NsJail is a process isolation tool for Linux."
-HOMEPAGE="https://google.github.io/nsjail/"
-SRC_URI="http://bindist.zmora-agh.memleak.pl/judge/${PV}/zmora-judge.tar.gz"
+DESCRIPTION="Zmora-judge is judge program for zmora."
+HOMEPAGE="https://github.com/zmora-agh/zmora-judge"
+SRC_URI="http://bindist.zmora-agh.memleak.pl/judge/zmora-judge-${PV}.tar.gz"
 S="${WORKDIR}/zmora-judge"
 LICENSE="Apache-2.0"
 SLOT="0"
