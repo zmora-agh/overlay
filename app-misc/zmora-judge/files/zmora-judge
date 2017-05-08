@@ -4,7 +4,9 @@
 
 # Apply default values for some conf.d variables.
 PIDFILE="${PIDFILE:-/var/run/zmora-judge.pid}"
+AMQPURL="${AMQPURL:-amqp://localhost}"
 TIMEOUT=${TIMEOUT:-15}
+USER="${USER:-zmora}"
 
 # The path to the apache2 binary
 ZMORA_JUDGE="/usr/bin/zmora-judge"
@@ -18,14 +20,14 @@ depend() {
 start() {
 	ebegin "Starting ${SVCNAME}"
 	# Use start stop daemon to apply system limits #347301 
-	start-stop-daemon --start --background --make-pidfile --exec ${ZMORA_JUDGE}
+	start-stop-daemon --start --background --user ${USER} --pidfile ${PIDFILE} --make-pidfile --exec ${ZMORA_JUDGE} -- ${AMQPURL}
 
 	eend $?
 }
 
 stop() {
 	ebegin "Stopping ${SVCNAME}"
-	start-stop-daemon --stop --exec ${ZMORA_JUDGE}
+	start-stop-daemon --stop --user ${USER} --pidfile ${PIDFILE} --exec ${ZMORA_JUDGE}
 
 	eend $?
 }

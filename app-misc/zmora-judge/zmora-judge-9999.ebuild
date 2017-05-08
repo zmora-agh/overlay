@@ -4,7 +4,7 @@
 
 EAPI=5
 
-#inherit git-r3 toolchain-funcs
+inherit user
 
 DESCRIPTION="Zmora-judge is judge program for zmora."
 HOMEPAGE="https://github.com/zmora-agh/zmora-judge"
@@ -13,13 +13,18 @@ if ! [[ ${PV} = *9999* ]]; then
 fi
 
 S="${WORKDIR}/zmora-judge"
-LICENSE="Apache-2.0"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND="app-misc/nsjail"
+
+pkg_setup(){
+	enewgroup zmora
+	enewuser zmora -1 -1 -1 zmora
+}
 
 src_install() {
 	dobin zmora-judge/zmora-judge
