@@ -19,7 +19,8 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="app-misc/nsjail"
+RDEPEND="app-misc/nsjail
+	app-misc/zmora-runner"
 
 pkg_setup(){
 	enewgroup zmora
